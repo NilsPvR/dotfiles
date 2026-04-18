@@ -87,7 +87,8 @@
     description = "Nils";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-    #  thunderbird
+      signal-desktop
+      obsidian
     ];
   };
 
