@@ -80,6 +80,9 @@
     #media-session.enable = true;
   };
 
+  # IMPURE! Not in dotfiles to prevent exposing public ip
+  security.pki.certificateFiles = [ /home/nils/documents/obsidian/couchdb-for-ols.crt ];
+
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
