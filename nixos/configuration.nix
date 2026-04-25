@@ -94,6 +94,8 @@
     packages = with pkgs; [
       signal-desktop
       obsidian
+      git
+      sourcegit
     ];
   };
 
