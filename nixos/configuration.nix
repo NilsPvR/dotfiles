@@ -96,6 +96,7 @@
       obsidian
       git
       sourcegit
+      zotero
     ];
   };
 
