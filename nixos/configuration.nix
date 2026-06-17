@@ -97,6 +97,7 @@
       git
       sourcegit
       zotero
+      vscode
     ];
   };
 
