@@ -100,6 +100,7 @@
       zotero
       vscode
       onlyoffice-desktopeditors
+      gimp
     ];
   };
 
