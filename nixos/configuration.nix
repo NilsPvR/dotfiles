@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, lib, inputs, ... }:
 
 {
   imports =
@@ -101,6 +101,30 @@
       vscode
       onlyoffice-desktopeditors
     ];
+  };
+
+  # Add fonts
+  fonts = {
+    fontconfig.enable = true;
+    packages = with pkgs; [
+      eb-garamond
+      lato
+    ];
+  };
+
+  # onlyoffice has trouble with symlinks: https://github.com/ONLYOFFICE/DocumentServer/issues/1859
+  system.userActivationScripts = {
+    copy-fonts-local-share = {
+      text = ''
+        rm -rf ~/.local/share/fonts
+        mkdir -p ~/.local/share/fonts
+        ${lib.concatMapStringsSep "\n" (font: ''
+          cp -rL ${font}/share/fonts/. ~/.local/share/fonts/ 2>/dev/null || true
+        '') config.fonts.packages}
+        find ~/.local/share/fonts -type d -exec chmod 555 {} \;
+        find ~/.local/share/fonts -type f -exec chmod 444 {} \;
+      '';
+    };
   };
 
   # Install firefox.
