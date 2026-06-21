@@ -115,6 +115,11 @@
   #  wget
   ];
 
+  # ensure /bin/bash exists to make
+  # #!/bin/bash script shebangs working
+  system.activationScripts.binbash.text =
+    "ln -sf /run/current-system/sw/bin/bash /bin/bash";
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
