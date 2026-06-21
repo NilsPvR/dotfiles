@@ -99,6 +99,7 @@
       sourcegit
       zotero
       vscode
+      onlyoffice-desktopeditors
     ];
   };
 
