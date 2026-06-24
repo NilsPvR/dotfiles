@@ -101,6 +101,7 @@
       vscode
       onlyoffice-desktopeditors
       gimp
+      inkscape
     ];
   };
 
