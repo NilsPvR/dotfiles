@@ -13,6 +13,11 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  # Configure access tokens
+  nix.extraOptions = ''
+    !include /etc/nix/github-token.conf # skipped if not present
+  '';
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
