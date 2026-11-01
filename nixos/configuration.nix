@@ -9,6 +9,8 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./virt-manager.nix
+      ./misc-usr-fix.nix
+      ./onlyoffice-font-fix.nix
     ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -116,22 +118,9 @@
     packages = with pkgs; [
       eb-garamond
       lato
+      corefonts # Andalé Mono, Arial, Arial Black, Comic Sans MS, Courier New, Georgia, Impact, Times New Roman, Trebuchet MS, Verdana, Webdings
+      vista-fonts # Calibri, Cambria, Candara, Consolas, Constantia, Corbel
     ];
-  };
-
-  # onlyoffice has trouble with symlinks: https://github.com/ONLYOFFICE/DocumentServer/issues/1859
-  system.userActivationScripts = {
-    copy-fonts-local-share = {
-      text = ''
-        rm -rf ~/.local/share/fonts
-        mkdir -p ~/.local/share/fonts
-        ${lib.concatMapStringsSep "\n" (font: ''
-          cp -rL ${font}/share/fonts/. ~/.local/share/fonts/ 2>/dev/null || true
-        '') config.fonts.packages}
-        find ~/.local/share/fonts -type d -exec chmod 555 {} \;
-        find ~/.local/share/fonts -type f -exec chmod 444 {} \;
-      '';
-    };
   };
 
   # Install firefox.
