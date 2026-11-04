@@ -141,6 +141,12 @@
   system.activationScripts.binbash.text =
     "ln -sf /run/current-system/sw/bin/bash /bin/bash";
 
+  # Direnv Config
+  programs.bash.shellInit = ''eval "$(direnv hook bash)"'';
+  ## load dev environment from directory
+  programs.direnv.enable = true;
+  environment.variables.DIRENV_WARN_TIMEOUT = 0;
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
