@@ -141,6 +141,9 @@
   system.activationScripts.binbash.text =
     "ln -sf /run/current-system/sw/bin/bash /bin/bash";
 
+  # run dynamically-linked binaries not meant for NixOS
+  programs.nix-ld.enable = true;
+
   # Direnv Config
   programs.bash.shellInit = ''eval "$(direnv hook bash)"'';
   ## load dev environment from directory
